@@ -13,14 +13,14 @@ export class CCAPI {
   }
 
   async fetch(endpoint) {
-    return fetch(`http://${this.ip}/ccapi${endpoint}`).then(async res => {
+    return fetch(`http://${this.ip}:8080${path}`).then(async res => {
       if(res.ok) return res.json();
       throw new Error(await res.text())
     });
   }
 
   async listFiles(storage, folder) {
-    const list = await this.fetch("/ver110/contents/sd2/" + folder);
+    const list = await this.fetch("/ccapi/ver110/contents/sd2/" + folder);
     return list;
   }
 
