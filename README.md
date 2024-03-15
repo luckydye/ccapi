@@ -1,3 +1,5 @@
 # ccapi
 
-JS api to use the Canon Camera API
+JS interface to use the Canon Camera API
+
+Including openapi definitions
