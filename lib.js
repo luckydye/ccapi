@@ -12,6 +12,7 @@ export class CCAPI {
     this.ip = ip;
   }
 
+  // abstract fetcg function, so the strategy used to fetch can be chosen from the outside too.
   async fetch(endpoint) {
     return fetch(`http://${this.ip}:8080${path}`).then(async res => {
       if(res.ok) return res.json();
