@@ -1,5 +1,9 @@
-export class CCAPI {
+/**
+ * A number, or a string containing a number.
+ * @typedef {{}} Storage
+ */
 
+export class CCAPI {
   /**
    * @type {`${number}.${number}.${number}.${number}`}
    */
@@ -12,19 +16,68 @@ export class CCAPI {
     this.ip = ip;
   }
 
-  // abstract fetcg function, so the strategy used to fetch can be chosen from the outside too.
+  // abstract fetch function, so the strategy used to fetch can be chosen from the outside too.
   async fetch(endpoint) {
-    return fetch(`http://${this.ip}:8080${path}`).then(async res => {
-      if(res.ok) return res.json();
-      throw new Error(await res.text())
+    return fetch(`http://${this.ip}${endpoint}`, {}).then(async (res) => {
+      if (res.ok) {
+        switch (res.headers.get("Content-Type")) {
+          case "application/json":
+            return res.json();
+          default:
+            return res.blob();
+        }
+      }
+      throw new Error(`${res.status} ${res.statusText} ${await res.text()}`);
     });
   }
 
-  async listFiles(storage, folder) {
-    const list = await this.fetch("/ccapi/ver110/contents/sd2/" + folder);
-    return list;
+  async index() {
+    return await this.fetch("/ccapi");
   }
 
-  // http://192.168.251.75:8080/ccapi/ver110/contents/sd2/100CANON
+  /**
+   * @returns {Promise<Storage[]>}
+   */
+  async storage() {
+    return await this.fetch("/ccapi/ver110/devicestatus/storage").then(
+      (data) => {
+        return data.storagelist;
+      },
+    );
+  }
 
+  /**
+   * @param {Storage} storage
+   */
+  async files(storage) {
+    const folders = await this.fetch(storage.path);
+    /** @type {string[]} */
+    const filePaths = [];
+    for (const folder of folders.path) {
+      const files = await this.fetch(folder);
+      filePaths.push(...files.path);
+    }
+    return filePaths;
+  }
+
+  /**
+   * @param {string} filePath
+   */
+  async thumbnail(filePath) {
+    return await this.fetch(filePath + "?kind=thumbnail");
+  }
+
+  /**
+   * @param {string} filePath
+   */
+  async info(filePath) {
+    return await this.fetch(filePath + "?kind=info");
+  }
+
+  /**
+   * @param {string} filePath
+   */
+  async download(filePath) {
+    return await this.fetch(filePath);
+  }
 }

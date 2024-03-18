@@ -1,0 +1,30 @@
+<html>
+    <body>
+        <main>
+            <div id="eleImages"></div>
+        </main>
+
+        <script type="module">
+            import { CCAPI } from "./lib.js";
+
+            const camera = new CCAPI(location.host);
+
+            const storageList = await camera.storage();
+            const storage = storageList[0];
+            if (!storage) {
+                throw new Error("No storage found");
+            }
+            const files = await camera.files(storage);
+            console.log(files);
+
+            for (const file of files) {
+                // const info = await camera.info(files[0]);
+                // console.log(info);
+                const img = document.createElement("img");
+                const blob = await camera.thumbnail(file);
+                img.src = URL.createObjectURL(blob);
+                eleImages.appendChild(img);
+            }
+        </script>
+    </body>
+</html>
