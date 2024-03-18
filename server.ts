@@ -1,11 +1,12 @@
 const server = Bun.serve({
   async fetch(req) {
-    let path = new URL(req.url).pathname;
+    const url = new URL(req.url);
+    let path = url.pathname;
 
     console.log(`GET ${path}`);
 
     if (path.startsWith("/ccapi")) {
-      return fetch("http://192.168.1.60:8080" + path);
+      return fetch(`http://192.168.1.60:8080${path}${url.search}`);
     }
 
     if (!path || path === "/") {
