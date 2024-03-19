@@ -1,6 +1,6 @@
 {
   "name": "canon-ccapi",
-  "version": "0.1.1-0",
+  "version": "0.1.1",
   "description": "JS api to use the Canon Camera API",
   "main": "lib.js",
   "scripts": {
@@ -14,5 +14,8 @@
     "@luckydye/log": "^0.7.2",
     "@types/bun": "latest"
   },
-  "files": ["lib.js", "lib.spec.ts"]
+  "files": [
+    "lib.js",
+    "lib.spec.ts"
+  ]
 }
