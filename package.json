@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "JS_LOG='debug' bun example/server.ts"
   },
+  "repository": "https://github.com/luckydye/ccapi.git",
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -14,8 +15,5 @@
     "@luckydye/log": "^0.7.2",
     "@types/bun": "latest"
   },
-  "files": [
-    "lib.js",
-    "lib.spec.ts"
-  ]
+  "files": ["lib.js", "lib.spec.ts"]
 }
