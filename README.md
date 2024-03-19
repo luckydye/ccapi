@@ -11,6 +11,8 @@ npm install canon-ccapi
 ## Usage
 
 ```javascript
+import { CCAPI } from "canon-ccapi";
+
 const camera = new CCAPI("192.168.1.60:8080");
 
 const cards = await camera.storage();
