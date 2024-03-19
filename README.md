@@ -1,30 +1,33 @@
 # ccapi
 
-JS interface to use the Canon Camera API
+JavaScript interface to use the Canon Camera RESTful API over Wi-Fi.
 
-Including openapi definitions
+## Installation
 
+```bash
+npm install canon-ccapi
+```
 
-# definitions
+## Usage
 
+```javascript
+const camera = new CCAPI("192.168.1.60:8080");
 
-Get contents
+const cards = await camera.storage();
+const files = await camera.files(cards[0]);
+const thumb = await camera.thumbnail(files[0]);
+```
 
-http://[IPAddress]:[Port]/ccapi/[Version]/contents/[storage]/[directory]/[file][?kind]
+See [example/index.html](./example/index.html) for full example.
 
+## Compatibility
 
-URI Parameters
-Name Status Data Type Description
-storage required string Storage name
-directory required string Directory name
-file required string File name
-kind optional string Contents kind
-Value of kind
-Name Description
+Tested on Canon EOS R6.
 
-main Main data (Default when kind is not designated)
-thumbnail Thumbnail image
-display Display image
-embedded Embedded image
-* RAW only
-info File information
+## How enable CCAPI on camera
+
+See [Latest-CCAPI](https://developers.canon-europe.com/s/article/Latest-CCAPI) for camera compatibility list.
+
+The Camera Control API is not enabled by default. To enable it, you need to install the latest firmware on your camera and sign-up for the Canon Developer Program. Then activate your camera using thier activation tool.
+
+For instructions on how to enable CCAPI on your camera, see [Camera Control API](https://developers.canon-europe.com/s/camera).

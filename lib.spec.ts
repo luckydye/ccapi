@@ -1,13 +1,13 @@
 import { test } from "bun:test";
 import { CCAPI } from "./lib";
 
-const IP = "192.168.1.60";
+const IP = "192.168.1.60:8080";
 
-// test("index", async () => {
-//   const camera = new CCAPI(IP);
-//   const index = await camera.index();
-//   console.log(index);
-// });
+test("index", async () => {
+  const camera = new CCAPI(IP);
+  const index = await camera.index();
+  console.log(index);
+});
 
 test("get first file thumbnail", async () => {
   const camera = new CCAPI(IP);

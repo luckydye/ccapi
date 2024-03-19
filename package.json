@@ -1,7 +1,7 @@
 {
   "name": "canon-ccapi",
   "version": "0.1.1",
-  "description": "JS api to use the Canon Camera API",
+  "description": "JavaScript interface to use the Canon Camera RESTful API over Wi-Fi.",
   "main": "lib.js",
   "scripts": {
     "dev": "JS_LOG='debug' bun example/server.ts"
@@ -14,8 +14,5 @@
     "@luckydye/log": "^0.7.2",
     "@types/bun": "latest"
   },
-  "files": [
-    "lib.js",
-    "lib.spec.ts"
-  ]
+  "files": ["lib.js", "lib.spec.ts"]
 }
