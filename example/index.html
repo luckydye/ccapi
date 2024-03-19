@@ -4,6 +4,13 @@
             body {
                 background-color: #000;
             }
+
+            img:hover {
+                cursor: pointer;
+                outline: 1px solid #fff;
+                z-index: 100;
+                position: relative;
+            }
         </style>
 
         <main>
@@ -23,12 +30,24 @@
             const files = await camera.files(storage);
             console.log(files);
 
-            for (const file of files) {
-                // const info = await camera.info(files[0]);
-                // console.log(info);
+            for (const filePath of files) {
                 const img = document.createElement("img");
-                const blob = await camera.thumbnail(file);
+                const blob = await camera.thumbnail(filePath);
                 img.src = URL.createObjectURL(blob);
+
+                img.onclick = async () => {
+                    const blob = await camera.original(filePath);
+                    const fileName = filePath.split("/").pop();
+                    const file = new File([blob], fileName, {
+                        type: "image/x-canon-cr3",
+                    });
+
+                    const a = document.createElement("a");
+                    a.href = URL.createObjectURL(file);
+                    a.download = file.name;
+                    a.click();
+                };
+
                 eleImages.appendChild(img);
             }
         </script>

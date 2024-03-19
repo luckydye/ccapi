@@ -17,8 +17,6 @@ test("get first file thumbnail", async () => {
     throw new Error("No storage found");
   }
   const files = await camera.files(storage);
-  console.log(files);
 
   const info = await camera.info(files[0]);
-  console.log(info);
 });

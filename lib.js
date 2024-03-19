@@ -1,24 +1,24 @@
 /**
  * A number, or a string containing a number.
- * @typedef {{}} Storage
+ * @typedef {{ path: string}} Storage
  */
 
 export class CCAPI {
   /**
-   * @type {`${number}.${number}.${number}.${number}`}
+   * @type {`${number}.${number}.${number}.${number}:${number}`}
    */
-  ip = undefined;
+  host = undefined;
 
   /**
-   * @param {`${number}.${number}.${number}.${number}`} ip
+   * @param {`${number}.${number}.${number}.${number}:${number}`} ip
    */
   constructor(ip) {
-    this.ip = ip;
+    this.host = ip;
   }
 
   // abstract fetch function, so the strategy used to fetch can be chosen from the outside too.
   async fetch(endpoint) {
-    return fetch(`http://${this.ip}${endpoint}`, {}).then(async (res) => {
+    return fetch(`http://${this.host}${endpoint}`, {}).then(async (res) => {
       if (res.ok) {
         switch (res.headers.get("Content-Type")) {
           case "application/json":
@@ -64,20 +64,20 @@ export class CCAPI {
    * @param {string} filePath
    */
   async thumbnail(filePath) {
-    return await this.fetch(filePath + "?kind=thumbnail");
+    return await this.fetch(`${filePath}?kind=thumbnail`);
   }
 
   /**
    * @param {string} filePath
    */
   async info(filePath) {
-    return await this.fetch(filePath + "?kind=info");
+    return await this.fetch(`${filePath}?kind=info`);
   }
 
   /**
    * @param {string} filePath
    */
-  async download(filePath) {
+  async original(filePath) {
     return await this.fetch(filePath);
   }
 }

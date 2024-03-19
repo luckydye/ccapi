@@ -4,15 +4,15 @@
   "description": "JS api to use the Canon Camera API",
   "main": "lib.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "JS_LOG='debug' bun example/server.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@biomejs/biome": "^1.6.1",
+    "@luckydye/log": "^0.7.2",
     "@types/bun": "latest"
   },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  }
+  "files": ["lib.js", "lib.spec.ts"]
 }
