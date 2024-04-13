@@ -26,7 +26,7 @@ See [example/index.html](./example/index.html) for full example.
 
 Tested on Canon EOS R6.
 
-## How enable CCAPI on camera
+## How to enable CCAPI on a camera
 
 See [Latest-CCAPI](https://developers.canon-europe.com/s/article/Latest-CCAPI) for camera compatibility list.
 
